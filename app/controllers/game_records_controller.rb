@@ -7,9 +7,12 @@ class GameRecordsController < ApplicationController
   def create
     game_record = GameRecord.new(game_record_params)
     if game_record.save
-      render json: game_record
+      render json: game_record, status: 201
     else
-      render json: {status: "error", code: 4000, message: game_record.errors}
+      body = {
+        errors:  game_record.errors.full_messages
+      }
+      render json: body, status: 400
     end
   end 
 
