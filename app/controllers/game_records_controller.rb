@@ -8,17 +8,14 @@ class GameRecordsController < ApplicationController
     if game_record.save
       render json: game_record
     else
-      render json: {status: "error", code: 4000, message: "missing field"}
+      render json: {status: "error", code: 4000, message: game_record.errors}
     end
-    
   end 
 
   private
 
 
   def game_record_params
-    # puts params
-    DeserializablePost.call(json_hash)
     params.require(:game_record).permit(:username,  :elapsed_time, :phrase_id)
   end
 end
