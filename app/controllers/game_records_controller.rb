@@ -14,7 +14,6 @@ class GameRecordsController < ApplicationController
 
   private
 
-
   def game_record_params
     params.require(:game_record).permit(:username,  :elapsed_time, :phrase_id)
   end
