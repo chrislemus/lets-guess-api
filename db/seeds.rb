@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Phrase.delete_all
+Phrase.create([
+  {phrase: 'duck'},
+  {phrase: 'cat'},
+  {phrase: 'dog'}
+])
+
+
+Phrase.first
+
+GameRecord.create({
+  username: 'chris',
+  time: 1.2,
+  phrase_id: Phrase.first.id
+})
