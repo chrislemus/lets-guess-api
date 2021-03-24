@@ -1,6 +1,7 @@
 class GameRecordsController < ApplicationController
   def index
-    game_records = GameRecord.all
+    phrase = params['phrase_id']
+    game_records = phrase ? GameRecord.where('phrase_id = ?', phrase) : GameRecord.all
     render  json: game_records, except: [:created_at, :updated_at]
   end 
   def create
