@@ -17,6 +17,6 @@ Phrase.first
 
 GameRecord.create({
   username: 'chris',
-  time: 1.2,
+  elapsed_time: 1.2,
   phrase_id: Phrase.first.id
 })
