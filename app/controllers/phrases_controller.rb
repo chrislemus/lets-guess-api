@@ -1,8 +1,8 @@
 class PhrasesController < ApplicationController
 
   def index
-    
-    render  plain: "ALl PHRASES "
+    phrases = Phrase.all
+    render  json: phrases, only: [:id, :phrase]
 
   end 
 end

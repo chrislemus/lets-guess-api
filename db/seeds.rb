@@ -6,14 +6,37 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Phrase.delete_all
+GameRecord.delete_all
+Category.delete_all
+sports = Category.create({name: 'sports'})
+movies = Category.create({name: 'movies'})
+animals = Category.create({name: 'animals'})
+cars = Category.create({name: 'cars'})
+technology = Category.create({name: 'technology'})
+
+
 Phrase.create([
-  {phrase: 'duck'},
-  {phrase: 'cat'},
-  {phrase: 'dog'}
+  {
+    phrase: 'duck',
+    category: animals
+  },
+  {
+    phrase: 'football',
+    category: sports
+  },
+  {
+    phrase: 'finding nemo',
+    category: movies
+  },
+  {
+    phrase: 'windshield',
+    category: cars
+  },
+  {
+    phrase: 'computer',
+    category: technology
+  }
 ])
-
-
-Phrase.first
 
 GameRecord.create({
   username: 'chris',
