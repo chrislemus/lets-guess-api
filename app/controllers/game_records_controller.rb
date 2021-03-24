@@ -16,6 +16,13 @@ class GameRecordsController < ApplicationController
     end
   end 
 
+  def time_stats
+    all_records = GameRecord.all.order(:elapsed_time)
+    body = { fastest_record: all_records.first.elapsed_time slowest_record:  }
+    body[:slowest_record] = all_records.count < 2 ? nil : all_records.last.elapsed_time
+    render json: body, status: 200
+  end
+
   private
 
   def game_record_params
