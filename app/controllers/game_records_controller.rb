@@ -1,9 +1,17 @@
 class GameRecordsController < ApplicationController
   def index
     phrase = params['phrase_id']
-    game_records = phrase ? GameRecord.where('phrase_id = ?', phrase) : GameRecord.all
-    render  json: game_records, except: [:created_at, :updated_at]
+    game_records = phrase ? GameRecord.where('phrase_id = ?', phrase).order(:elapsed_time) : GameRecord.all
+    body = {}
+    if phrase
+      body[:fastest_record] = game_records.count > 0 ? game_records.first.elapsed_time : nil
+      body[:slowest_record] = game_records.count > 1 ? game_records.last.elapsed_time : nil
+    end
+    body[:game_records] = game_records
+    render  json: body, except: [:created_at, :updated_at]
   end 
+
+
   def create
     game_record = GameRecord.new(game_record_params)
     if game_record.save
@@ -16,12 +24,7 @@ class GameRecordsController < ApplicationController
     end
   end 
 
-  def time_stats
-    all_records = GameRecord.all.order(:elapsed_time)
-    body = { fastest_record: all_records.first.elapsed_time slowest_record:  }
-    body[:slowest_record] = all_records.count < 2 ? nil : all_records.last.elapsed_time
-    render json: body, status: 200
-  end
+
 
   private
 
